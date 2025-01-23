@@ -20,6 +20,7 @@ mongoose.connect(MONGO_URL)
 
 
 app.use('/api', route)
+app.use('/fetchapi', route)
 
 app.listen(PORT, ()=>(
     console.log("Server are connected on http//localhost:",PORT)

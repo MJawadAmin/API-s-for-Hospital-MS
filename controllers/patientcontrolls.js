@@ -117,3 +117,23 @@ export const createUser = async(req , res )=>{
         
     }
 }
+export const getAll = async(req , res)=>{
+    try { 
+         const userData= await UserModel.find()
+        
+        if(!userData){
+            res.status(404).json({
+                status: "Data did not found"
+            })
+        }
+         res.status(200).json({
+            status:"Success", userData
+        })
+        } catch (error) {
+        res.send(500).json({
+            status: "failed ",
+            messaeg : " Not fethed the data", error
+        })
+        
+    }
+}
