@@ -137,3 +137,19 @@ export const getAll = async(req , res)=>{
         
     }
 }
+export const getOne= async (req , res)=>{
+    try {
+        const id = req.params.id
+        const userExist= await UserModel.findById(id)
+        if(!userExist){
+            res.send(404).json({status:"404"})
+        }
+        res.status(200).json({status: "Find", userExist})
+        
+    } catch (error) {
+        res.send(500).json({
+            status: "failed ",
+            messaeg : " Not fethed the data", error
+        })
+    }
+}
