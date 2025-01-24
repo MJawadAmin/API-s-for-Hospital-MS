@@ -153,3 +153,80 @@ export const getOne= async (req , res)=>{
         })
     }
 }
+//                There was the errors which is solved in below API
+// export const updateData= async (req , res )=>{
+//     try {
+//         const id = req.params.id;
+//         const userexist= await UserModel.findById(id);
+//         if(!userexist){
+//            {return missed}    res.status(404).json({msg:"User Id not found"})
+//         }
+//         const updatedData= await {should be find in userModel not in userExist} Userexist.findByIdAndUpdate
+// (id, req.body,{new :true})
+//         {return missed}        res.status(200).json({updatedData})
+//          } catch (error) {
+//         {return missed}      res.status(500).json({err: error})
+//           } 
+//         }
+        export const updateData = async (req, res) => {
+            try {
+                const id = req.params.id; // Define `id`
+                const userexist = await UserModel.findById(id); // Find the user by ID
+                if (!userexist) {
+                    return res.status(404).json({ msg: "User ID not found" }); // Return if user doesn't exist
+                }
+        
+                // Update the user data
+                const updatedData = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
+        
+                return res.status(200).json({ updatedData }); // Return the updated data
+            } catch (error) {
+                return res.status(500).json({ err: error.message }); // Handle errors properly
+            }
+        };
+
+     // { Simple }
+     export const deletData= async (req, res)=>{
+        try {
+            const id= req.params.id;
+            const userExist= await UserModel.findById(id);  
+            if(!userExist){
+                return res.status(404).json({
+                    message : "User did not find"
+                })
+            }  const deletedData= await UserModel.findByIdAndDelete(id , req.body, {new: true})
+            return res.status(200).json({messaeg:"Data deleted Successfully ",deletData})
+        }
+        catch(error){
+
+            res.status(500).json({err : error})
+        }
+       }
+    // {same deleted api}
+    // export const deletData = async (req, res) => {
+    //     try {
+    //         const id = req.params.id;
+    
+    //         // Check if the user exists
+    //         const userExist = await UserModel.findById(id);
+    //         if (!userExist) {
+    //             return res.status(404).json({
+    //                 message: "User not found"
+    //             });
+    //         }
+    
+    //         // Delete the user
+    //         const deletedData = await UserModel.findByIdAndDelete(id);
+    
+    //         // Respond with success
+    //         return res.status(200).json({
+    //             message: "Data deleted successfully",
+    //             deletedData
+    //         });
+    //     } catch (error) {
+    //         // Handle errors
+    //         return res.status(500).json({ err: error.message });
+    //     }
+    // };
+    
+        
